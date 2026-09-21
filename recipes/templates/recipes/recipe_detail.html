@@ -4,52 +4,51 @@
 {{ recipe.name }}
 {% endblock %}
 
-
 {% block content %}
 
-{% if recipe %}
-
-<div class="mb-3">
+<div class="mb-4">
 
     <a
-        href="/recipes/"
-        class="btn btn-outline-secondary btn-sm">
+        href="{% url 'recipe_list' %}"
+        class="btn btn-outline-dark">
 
         <i class="bi bi-arrow-left"></i>
-        Назад
+        Назад до рецептів
 
     </a>
 
 </div>
 
 
-<div class="card border-0 shadow">
+<div class="card border-0 shadow-lg overflow-hidden">
 
-    <div class="row g-0">
+    <div class="row g-0 align-items-stretch">
 
-        <div class="col-md-6">
+        <!-- Фото -->
+   <div
+    class="col-lg-6 recipe-detail-photo"
+    style="
+        background-image: url('{{ recipe.image_url }}');
+        background-position: center center;
+    ">
+</div>
 
-            <img
-                src="{{ recipe.image }}"
-                class="img-fluid rounded-start recipe-detail-image"
-                alt="{{ recipe.name }}">
+        <!-- Інформація -->
+        <div class="col-lg-6 d-flex">
 
-        </div>
+            <div class="card-body p-5 d-flex flex-column justify-content-center">
 
-
-        <div class="col-md-6">
-
-            <div class="card-body p-5">
-
-                <span class="badge bg-warning text-dark mb-3">
+                <span class="badge bg-warning text-dark mb-3 align-self-start">
                     {{ recipe.country }}
                 </span>
 
-                <h1 class="card-title mb-4">
+
+                <h1 class="fw-bold mb-3">
                     {{ recipe.name }}
                 </h1>
 
-                <p class="card-text fs-5 text-muted">
+
+                <p class="lead text-muted">
                     {{ recipe.description }}
                 </p>
 
@@ -57,17 +56,39 @@
                 <hr>
 
 
-                <div class="mt-4">
+                <h3 class="mt-4">
+                    <i class="bi bi-basket"></i>
+                    Інгредієнти
+                </h3>
 
-                    <span class="text-muted">
-                        Recipe ID:
-                    </span>
+                <p class="fs-5">
+                    {{ recipe.ingredients }}
+                </p>
 
-                    <strong>
-                        #{{ recipe.id }}
-                    </strong>
 
-                </div>
+                <h3 class="mt-4">
+                    <i class="bi bi-list-ol"></i>
+                    Приготування
+                </h3>
+
+                <p class="fs-5">
+                    {{ recipe.instructions }}
+                </p>
+
+
+                {% if recipe.youtube_url %}
+
+                <a
+                    href="{{ recipe.youtube_url }}"
+                    target="_blank"
+                    class="btn btn-danger btn-lg mt-4 align-self-start">
+
+                    <i class="bi bi-youtube"></i>
+                    Дивитися відеорецепт
+
+                </a>
+
+                {% endif %}
 
             </div>
 
@@ -76,13 +97,5 @@
     </div>
 
 </div>
-
-{% else %}
-
-<div class="alert alert-warning">
-    Рецепт не знайдено.
-</div>
-
-{% endif %}
 
 {% endblock %}
