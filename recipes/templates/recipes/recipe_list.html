@@ -5,52 +5,81 @@
 {% endblock %}
 
 
+{% block hero %}
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>World Recipes</h1>
+
+        <p>
+            Відкривай смаки різних кухонь світу
+        </p>
+
+        <a
+            href="#recipes"
+            class="btn btn-warning btn-lg px-4 mt-3">
+
+            Переглянути рецепти
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<div id="recipes">
 
-    {% for recipe in recipes %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-    <div class="col">
+        {% for recipe in recipes %}
 
-        <div class="card h-100 shadow-sm recipe-card">
+        <div class="col">
 
-            <img
-            src="{{ recipe.image_url }}"
-            class="card-img-top recipe-image"
-            alt="{{ recipe.name }}">
+            <div class="card h-100 shadow-sm recipe-card">
 
-            <div class="card-body d-flex flex-column">
+                <img
+                    src="{{ recipe.image_url }}"
+                    class="card-img-top recipe-image"
+                    alt="{{ recipe.name }}">
 
-                <span class="badge bg-warning text-dark mb-2 align-self-start">
-                    {{ recipe.country }}
-                </span>
+                <div class="card-body d-flex flex-column">
 
-                <h5 class="card-title">
-                    {{ recipe.name }}
-                </h5>
+                    <span class="badge bg-warning text-dark mb-2 align-self-start">
+                        {{ recipe.country }}
+                    </span>
 
-                <p class="card-text text-muted">
-                    {{ recipe.description }}
-                </p>
+                    <h5 class="card-title">
+                        {{ recipe.name }}
+                    </h5>
 
-                <a
-                    href="/recipes/{{ recipe.id }}/"
-                    class="btn btn-dark mt-auto">
+                    <p class="card-text text-muted">
+                        {{ recipe.description }}
+                    </p>
 
-                    Переглянути рецепт
+                    <a
+                        href="{% url 'recipe_detail' recipe.id %}"
+                        class="btn btn-dark mt-auto">
 
-                    <i class="bi bi-arrow-right"></i>
+                        Переглянути рецепт
+                        <i class="bi bi-arrow-right"></i>
 
-                </a>
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        {% endfor %}
 
-    {% endfor %}
+    </div>
 
 </div>
 

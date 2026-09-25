@@ -4,70 +4,65 @@
 {{ recipe.name }}
 {% endblock %}
 
+
 {% block content %}
 
-<div class="mb-4">
+<a
+    href="{% url 'recipe_list' %}"
+    class="btn btn-outline-dark mb-4">
 
-    <a
-        href="{% url 'recipe_list' %}"
-        class="btn btn-outline-dark">
-
-        <i class="bi bi-arrow-left"></i>
-        Назад до рецептів
-
-    </a>
-
-</div>
+    <i class="bi bi-arrow-left"></i>
+    Назад до рецептів
+</a>
 
 
-<div class="card border-0 shadow-lg overflow-hidden">
+<div class="card recipe-detail-card border-0 shadow-lg">
 
-    <div class="row g-0 align-items-stretch">
+    <div class="row g-0">
 
-        <!-- Фото -->
-   <div
-    class="col-lg-6 recipe-detail-photo"
-    style="
-        background-image: url('{{ recipe.image_url }}');
-        background-position: center center;
-    ">
-</div>
+        <!-- ЛІВА ЧАСТИНА: ФОТО -->
+        <div class="col-lg-6 recipe-detail-image-wrapper">
 
-        <!-- Інформація -->
-        <div class="col-lg-6 d-flex">
+            <img
+                src="{{ recipe.image_url }}"
+                class="recipe-detail-image"
+                alt="{{ recipe.name }}">
 
-            <div class="card-body p-5 d-flex flex-column justify-content-center">
+        </div>
 
-                <span class="badge bg-warning text-dark mb-3 align-self-start">
+
+        <!-- ПРАВА ЧАСТИНА: РЕЦЕПТ -->
+        <div class="col-lg-6">
+
+            <div class="card-body p-4 p-lg-5">
+
+                <span class="badge bg-warning text-dark mb-3">
                     {{ recipe.country }}
                 </span>
 
-
-                <h1 class="fw-bold mb-3">
+                <h1 class="display-5 fw-bold mb-3">
                     {{ recipe.name }}
                 </h1>
 
-
-                <p class="lead text-muted">
+                <p class="lead text-secondary">
                     {{ recipe.description }}
                 </p>
 
+                <hr class="my-4">
 
-                <hr>
 
-
-                <h3 class="mt-4">
-                    <i class="bi bi-basket"></i>
+                <h3 class="fw-bold mb-3">
+                    <i class="bi bi-basket me-2"></i>
                     Інгредієнти
                 </h3>
 
-                <p class="fs-5">
+                <p class="fs-5 mb-4">
                     {{ recipe.ingredients }}
                 </p>
 
 
-                <h3 class="mt-4">
-                    <i class="bi bi-list-ol"></i>
+                <h3 class="fw-bold mb-3">
+                    <i class="bi bi-list-ol me-2"></i>
                     Приготування
                 </h3>
 
@@ -81,9 +76,9 @@
                 <a
                     href="{{ recipe.youtube_url }}"
                     target="_blank"
-                    class="btn btn-danger btn-lg mt-4 align-self-start">
+                    class="btn btn-danger btn-lg mt-3">
 
-                    <i class="bi bi-youtube"></i>
+                    <i class="bi bi-youtube me-2"></i>
                     Дивитися відеорецепт
 
                 </a>
